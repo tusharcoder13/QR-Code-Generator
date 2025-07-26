@@ -18,9 +18,7 @@ A simple and efficient web-based QR Code Generator built using HTML, CSS, and Ja
 
 ## 📸 Demo
 
-![QR Code Generator Screenshot](https://raw.githubusercontent.com/tusharcoder13/QR-Code-Generator/main/screenshot.png)
-
-
+![
 
 ## 💡 How to Use
 
