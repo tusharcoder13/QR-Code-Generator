@@ -16,9 +16,7 @@ A simple and efficient web-based QR Code Generator built using HTML, CSS, and Ja
 - 🔹 Easy to use and mobile-friendly interface
 - 🔹 Downloadable QR Code image
 
-## 📸 Demo
 
-![
 
 ## 💡 How to Use
 
