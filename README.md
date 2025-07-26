@@ -20,7 +20,7 @@ A simple and efficient web-based QR Code Generator built using HTML, CSS, and Ja
 
 ![QR Code Generator Screenshot](https://raw.githubusercontent.com/tusharcoder13/QR-Code-Generator/main/screenshot.png)
 
-> 📌 *Add your own screenshot to the repo and update the image path above*
+
 
 ## 💡 How to Use
 
