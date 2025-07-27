@@ -14,7 +14,30 @@
         <h1><i class="fas fa-qrcode"></i> QR Code Generator</h1>
         
         <div class="input-group">
+            <!-- <input type="text" id="text" placeholder="Enter text or URL to generate QR code"> -->
+            <select id="mode" onchange="toggleMode()">
+            <option value="text">Text/URL</option>
+            <option value="wifi">WiFi</option>
+            </select>
+        </div>
+
+        <div id="text-inputs">
             <input type="text" id="text" placeholder="Enter text or URL to generate QR code">
+        </div>
+
+        <div id="wifi-inputs" style="display: none;">
+            <input type="text" id="ssid" placeholder="WiFi SSID">
+            <div class="password-wrapper">
+                <input type="password" id="password" placeholder="WiFi Password">
+                <button type="button" id="toggle-password" onclick="togglePasswordVisibility()">
+                <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            <select id="encryption">
+              <option value="WPA">WPA/WPA2</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">No Password</option>
+            </select>
         </div>
         
         <button class="btn" onclick="generateQRCode()">
