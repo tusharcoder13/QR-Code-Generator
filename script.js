@@ -3,44 +3,87 @@ let currentQRCode = null;
         let currentText = '';
 
         function generateQRCode() {
+            const mode = document.getElementById('mode').value;
             const qrDiv = document.getElementById('qr-code');
             const qrActions = document.getElementById('qr-actions');
             const preview = document.getElementById('content-preview');
             const previewText = document.getElementById('preview-text');
-            currentText = document.getElementById('text').value.trim();
-
-            if (!currentText) {
-                showToast('Please enter text or URL');
-                return;
-            }
 
             qrDiv.innerHTML = '';
             qrDiv.classList.remove('hidden');
             preview.style.display = 'none';
-            
-            // Generate QR code with black color
-            currentQRCode = new QRCode(qrDiv, {
-                text: currentText,
-                width: 200,
-                height: 200,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
 
-            // Update preview
-            previewText.textContent = currentText;
-            preview.style.display = 'block';
+            let qrContent = '';
 
-            // Get the data URL of the QR code image after a small delay
-            setTimeout(() => {
-                const img = qrDiv.querySelector('img');
-                if (img) {
-                    qrDataUrl = img.src;
-                    qrActions.classList.remove('hidden');
-                }
-            }, 100);
+            if (mode === 'text') {
+                const inputText = document.getElementById('text').value.trim();
+            if (!inputText) {
+                showToast('Please enter text or URL');
+                return;
+            }
+            qrContent = inputText;
+        } else if (mode === 'wifi') {
+           const ssid = document.getElementById('ssid').value.trim();
+           const password = document.getElementById('password').value.trim();
+           const encryption = document.getElementById('encryption').value;
+
+           if (!ssid) {
+            showToast('Please enter WiFi SSID');
+            return;
         }
+
+        qrContent = `WIFI:T:${encryption};S:${ssid};`;
+        if (encryption !== 'nopass') {
+            if (!password) {
+                showToast('Please enter WiFi password');
+                return;
+            }
+            qrContent += `P:${password};`;
+        }
+        qrContent += ';';
+    }
+
+    currentText = qrContent;
+
+    currentQRCode = new QRCode(qrDiv, {
+        text: qrContent,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    previewText.textContent = qrContent;
+    preview.style.display = 'block';
+
+    setTimeout(() => {
+        const img = qrDiv.querySelector('img');
+        if (img) {
+            qrDataUrl = img.src;
+            qrActions.classList.remove('hidden');
+        }
+    }, 100);
+
+
+        }
+
+        function togglePasswordVisibility() {
+    const passwordInput = document.getElementById("password");
+    const toggleBtn = document.getElementById("toggle-password");
+    const icon = toggleBtn.querySelector("i");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+
 
         function downloadQRCode() {
             if (!qrDataUrl) {
@@ -129,4 +172,10 @@ let currentQRCode = null;
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
+        }
+
+        function toggleMode() {
+            const mode = document.getElementById('mode').value;
+            document.getElementById('text-inputs').style.display = (mode === 'text') ? 'block' : 'none';
+            document.getElementById('wifi-inputs').style.display = (mode === 'wifi') ? 'block' : 'none';
         }
