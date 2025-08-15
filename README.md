@@ -23,3 +23,5 @@ A simple and efficient web-based QR Code Generator built using HTML, CSS, and Ja
 1. Clone the repository:
    ```bash
    git clone https://github.com/tusharcoder13/QR-Code-Generator.git
+
+lorem lorem lorem 
